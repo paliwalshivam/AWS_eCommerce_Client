@@ -1,8 +1,12 @@
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/components/custom_surfix_icon.dart';
 import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/components/form_error.dart';
 import 'package:shop_app/screens/complete_profile/complete_profile_screen.dart';
+import 'package:shop_app/singeltons/emailAddress.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -51,11 +55,30 @@ class _SignUpFormState extends State<SignUpForm> {
           SizedBox(height: getProportionateScreenHeight(40)),
           DefaultButton(
             text: "Continue",
-            press: () {
+            press: () async {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
-                // if all are valid then go to success screen
-                Navigator.pushNamed(context, OtpScreen.routeName);
+
+                // SignUp Logic
+                final emailAddress = Provider.of<EmailProvider>(context,listen: false);
+                emailAddress.emailAddress = email;
+                print(emailAddress.emailAddress);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Loading")));
+
+                try{
+                  if(password == conform_password) {
+                    var signUpResult = await Amplify.Auth.signUp(
+                        username: email,
+                        password: password,
+                        options: CognitoSignUpOptions(userAttributes: {'email' : email}));
+
+                    if(signUpResult.isSignUpComplete){
+                      Navigator.pushNamed(context, OtpScreen.routeName);
+                    }
+                  }
+                }catch (e){
+                  print(e.toString());
+                }
               }
             },
           ),
@@ -162,4 +185,6 @@ class _SignUpFormState extends State<SignUpForm> {
       ),
     );
   }
+
+
 }

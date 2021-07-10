@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/socal_card.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/screens/otp/otp_screen.dart';
 import 'package:shop_app/size_config.dart';
 
 import 'sign_up_form.dart';
@@ -25,6 +26,17 @@ class Body extends StatelessWidget {
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
                 SignUpForm(),
+                Center(
+                  child: TextButton(
+                    child: Text("Already Registered ? Confirm your E-Mail address"
+                    ,style: TextStyle(
+                        color: Colors.blueAccent
+                      ),),
+                    onPressed: (){
+                      Navigator.pushNamed(context, OtpScreen.routeName);
+                    },
+                  ),
+                ),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

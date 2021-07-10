@@ -1,7 +1,9 @@
+import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/size_config.dart';
-
+import 'package:shop_app/singeltons/emailAddress.dart';
 import '../../../constants.dart';
 import '../../complete_profile/complete_profile_screen.dart';
 
@@ -165,9 +167,18 @@ class _OtpFormState extends State<OtpForm> {
           SizedBox(height: SizeConfig.screenHeight * 0.15),
           DefaultButton(
             text: "Continue",
-            press: () {
+            press: () async{
+              final emailAddress = Provider.of<EmailProvider>(context,listen: false);
               print(otp);
-              Navigator.pushNamed(context, CompleteProfileScreen.routeName);
+              try{
+                var otpResult = await Amplify.Auth.confirmSignUp(username: emailAddress.emailAddress, confirmationCode: otp);
+                if(otpResult.isSignUpComplete){
+                  Navigator.pushNamed(context, CompleteProfileScreen.routeName);
+                }
+              }catch (e){
+                print(e.toString());
+              }
+
             },
           )
         ],

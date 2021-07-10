@@ -1,3 +1,5 @@
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_surfix_icon.dart';
 import 'package:shop_app/components/form_error.dart';
@@ -49,12 +51,21 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
             text: "Continue",
-            press: () {
+            press: () async{
+
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
-                // if all are valid then go to success screen
-                KeyboardUtil.hideKeyboard(context);
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Signing In , Please Wait")));
+                try{
+                  var signInResult = await Amplify.Auth.signIn(username: email, password: password);
+                  if(signInResult.isSignedIn){
+                    KeyboardUtil.hideKeyboard(context);
+                    Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                  }
+                }on AuthException catch (e){
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.underlyingException)));
+                }
+
               }
             },
           ),

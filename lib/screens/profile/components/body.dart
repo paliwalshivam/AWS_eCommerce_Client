@@ -1,4 +1,6 @@
+import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_app/wrapper/Wrapper.dart';
 
 import 'profile_menu.dart';
 import 'profile_pic.dart';
@@ -35,7 +37,11 @@ class Body extends StatelessWidget {
           ProfileMenu(
             text: "Log Out",
             icon: "assets/icons/Log out.svg",
-            press: () {},
+            press: () async{
+              Amplify.Auth.signOut().then((value){
+                Navigator.pushReplacement<void,void>(context, MaterialPageRoute(builder: (context) => Wrapper()));
+              });
+            },
           ),
         ],
       ),

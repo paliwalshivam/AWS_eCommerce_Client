@@ -26,9 +26,9 @@ class Body extends StatelessWidget {
         SizedBox(
           width: SizeConfig.screenWidth * 0.6,
           child: DefaultButton(
-            text: "Back to home",
+            text: "Browse Products",
             press: () {
-              Navigator.pushNamed(context, HomeScreen.routeName);
+              Navigator.pushReplacementNamed<void,void>(context, HomeScreen.routeName);
             },
           ),
         ),
