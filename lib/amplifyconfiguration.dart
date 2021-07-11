@@ -31,5 +31,18 @@ const amplifyconfig = ''' {
                 }
             }
         }
+    },
+    "api": {
+        "plugins": {
+            "awsAPIPlugin": {
+                "ecommercecustomer": {
+                    "endpointType": "GraphQL",
+                    "endpoint": "https://6gp7okoovndkvk5hegc4u5v6tq.appsync-api.us-east-1.amazonaws.com/graphql",
+                    "region": "us-east-1",
+                    "authorizationType": "API_KEY",
+                    "apiKey": "da2-iqtg7f2safewlkhmjxbufeullq"
+                }
+            }
+        }
     }
 }''';

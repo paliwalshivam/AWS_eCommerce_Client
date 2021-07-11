@@ -1,3 +1,4 @@
+import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
@@ -30,11 +31,14 @@ class _MyAppState extends State<MyApp> {
     final _amplifyInstance = Amplify;
     try{
       await _amplifyInstance.addPlugins([
-        AmplifyAuthCognito()
+        AmplifyAuthCognito(),
+        AmplifyAPI()
       ]);
       await _amplifyInstance.configure(amplifyconfig);
       print("Successfully Configured Amplify");
-      keyData.text = "Configured";
+      setState(() {
+        keyData.text = "Configured";
+      });
     }catch (e){
       print(e.toString());
     }
@@ -48,10 +52,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
         theme: theme(),
-        // home: SplashScreen(),
-        // We use routeName so that we don't need to remember the name
         initialRoute: Wrapper.routeName,
         routes: routes,
       ),

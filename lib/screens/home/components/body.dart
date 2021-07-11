@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/utils/fetchData.dart';
 
 import '../../../size_config.dart';
 import 'categories.dart';
@@ -17,7 +18,11 @@ class Body extends StatelessWidget {
             SizedBox(height: getProportionateScreenHeight(20)),
             HomeHeader(),
             SizedBox(height: getProportionateScreenWidth(10)),
-            DiscountBanner(),
+            InkWell(
+              onTap: () async{
+                getData();
+              },
+                child: DiscountBanner()),
             Categories(),
             SpecialOffers(),
             SizedBox(height: getProportionateScreenWidth(30)),
