@@ -28,6 +28,11 @@ const amplifyconfig = ''' {
                     "Default": {
                         "authenticationFlowType": "USER_SRP_AUTH"
                     }
+                },
+                "DynamoDBObjectMapper": {
+                    "Default": {
+                        "Region": "us-east-1"
+                    }
                 }
             }
         }
@@ -42,6 +47,18 @@ const amplifyconfig = ''' {
                     "authorizationType": "API_KEY",
                     "apiKey": "da2-iqtg7f2safewlkhmjxbufeullq"
                 }
+            }
+        }
+    },
+    "storage": {
+        "plugins": {
+            "awsDynamoDbStoragePlugin": {
+                "name": "ProductModel-aid5kt6ahngb3bvewg4jdt2uua-dev",
+                "region": "us-east-1",
+                "arn": "arn:aws:dynamodb:us-east-1:989775503323:table/ProductModel-aid5kt6ahngb3bvewg4jdt2uua-dev",
+                "streamArn": "arn:aws:dynamodb:us-east-1:989775503323:table/ProductModel-aid5kt6ahngb3bvewg4jdt2uua-dev/stream/2021-07-07T10:19:30.169",
+                "partitionKeyName": "id",
+                "partitionKeyType": "S"
             }
         }
     }

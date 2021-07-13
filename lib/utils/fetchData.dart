@@ -1,29 +1,23 @@
-import 'package:amplify_api/amplify_api.dart';
-import 'package:amplify_flutter/amplify.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-void getData() async {
-  try {
-    String graphQLDocument = '''query ListTodos {
-      listTodos {
-        items {
-          id
-          name
-          description
-        }
-        nextToken
-      }
-    }''';
+void getProductData() async {
 
-    var operation = Amplify.API.query(
-        request: GraphQLRequest<String>(
-      document: graphQLDocument,
-    ));
+  // List list ;
+  // var response = await http.get(Uri.parse('https://ym1sv9rs28.execute-api.us-east-1.amazonaws.com/production/products'));
+  // Map<String,dynamic> map  = json.decode(response.body);
+  // list = map["body"];
 
-    var response = await operation.response;
-    var data = response.data;
 
-    print('Query result: ' + data);
-  } on ApiException catch (e) {
-    print('Query failed: $e');
+  List<Map<String,dynamic>> list;
+  final response = await http.get(Uri.parse('https://ym1sv9rs28.execute-api.us-east-1.amazonaws.com/production/products'));
+  Map<String,dynamic> map  = json.decode(response.body);
+  final body = map['body'];
+
+  if(body is List){
+    list = List.from(map["body"] as List<Map<String,dynamic>>);
+  }else {
+    print('Body is\'nt List');
   }
+
 }
