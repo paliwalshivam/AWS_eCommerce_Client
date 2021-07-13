@@ -1,12 +1,18 @@
 class ProductModel {
-  final String statusCode;
-  final List<Object> body;
-  ProductModel({this.statusCode,this.body});
+  String productId;
+  String companyName;
+  String productName;
+  String category;
+  String description;
+  String price;
+  String size;
 
-  factory ProductModel.fromJson(Map<String , dynamic> parsedJson){
-    return ProductModel(
-    statusCode: parsedJson["statusCode"].toString(),
-    body: parsedJson["body"]
-    );
-  }
+  ProductModel(
+      {this.productId,
+      this.companyName,
+      this.productName,
+      this.category,
+      this.description,
+      this.price,
+      this.size});
 }

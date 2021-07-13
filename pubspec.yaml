@@ -36,6 +36,7 @@ dependencies:
   amplify_api:
   flutter_spinkit:
   http:
+  font_awesome_flutter:
 
 dev_dependencies:
   flutter_test:

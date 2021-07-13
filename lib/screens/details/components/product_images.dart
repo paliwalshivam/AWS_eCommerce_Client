@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/models/Product.dart';
-
+import 'package:provider/provider.dart';
+import 'package:shop_app/utils/selectedProductData.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
 class ProductImages extends StatefulWidget {
-  const ProductImages({
-    Key key,
-    @required this.product,
-  }) : super(key: key);
-
-  final Product product;
 
   @override
   _ProductImagesState createState() => _ProductImagesState();
@@ -20,23 +14,21 @@ class _ProductImagesState extends State<ProductImages> {
   int selectedImage = 0;
   @override
   Widget build(BuildContext context) {
+    final selectedProduct = Provider.of<SelectedProductData>(context);
     return Column(
       children: [
         SizedBox(
           width: getProportionateScreenWidth(238),
           child: AspectRatio(
             aspectRatio: 1,
-            child: Hero(
-              tag: widget.product.id.toString(),
-              child: Image.asset(widget.product.images[selectedImage]),
-            ),
+            child: Image.network("https://productslist231449-dev.s3.us-east-1.amazonaws.com/public/"+selectedProduct.productID+"img1"),
           ),
         ),
-        // SizedBox(height: getProportionateScreenWidth(20)),
+        SizedBox(height: getProportionateScreenWidth(20)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ...List.generate(widget.product.images.length,
+            ...List.generate(3,
                 (index) => buildSmallProductPreview(index)),
           ],
         )
@@ -45,6 +37,7 @@ class _ProductImagesState extends State<ProductImages> {
   }
 
   GestureDetector buildSmallProductPreview(int index) {
+    final selectedProduct = Provider.of<SelectedProductData>(context);
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -63,7 +56,7 @@ class _ProductImagesState extends State<ProductImages> {
           border: Border.all(
               color: kPrimaryColor.withOpacity(selectedImage == index ? 1 : 0)),
         ),
-        child: Image.asset(widget.product.images[index]),
+        child: Image.network("https://productslist231449-dev.s3.us-east-1.amazonaws.com/public/"+selectedProduct.productID+"img"+(index+1).toString()),
       ),
     );
   }

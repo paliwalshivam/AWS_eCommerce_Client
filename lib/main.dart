@@ -8,6 +8,7 @@ import 'package:shop_app/routes.dart';
 import 'package:shop_app/singeltons/isAmplifyConfigured.dart';
 import 'package:shop_app/theme.dart';
 import 'package:shop_app/singeltons/emailAddress.dart';
+import 'package:shop_app/utils/selectedProductData.dart';
 import 'package:shop_app/wrapper/Wrapper.dart';
 
 void main() {
@@ -48,7 +49,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => EmailProvider())
+        ChangeNotifierProvider(create: (context) => EmailProvider()),
+        ChangeNotifierProvider(create: (context) => SelectedProductData())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

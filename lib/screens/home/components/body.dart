@@ -19,26 +19,7 @@ class Body extends StatelessWidget {
             SizedBox(height: getProportionateScreenHeight(20)),
             HomeHeader(),
             SizedBox(height: getProportionateScreenWidth(10)),
-            InkWell(
-              onTap: () async{
-                Map<String,dynamic> map = {
-                  "statusCode" : 200,
-                  "body" : [
-                    {
-                      "product" : "clear",
-                      "company" : "new"
-                    },
-                    {
-                      "product" : "clear2",
-                      "company" : "new2"
-                    }
-                  ]
-                };
-                print(map);
-                getProductData();
-
-              },
-                child: DiscountBanner()),
+            DiscountBanner(),
             Categories(),
             SizedBox(height: getProportionateScreenWidth(30)),
             PopularProducts(),
