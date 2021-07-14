@@ -34,6 +34,7 @@ dependencies:
   amplify_core:
   amplify_auth_cognito:
   amplify_api:
+  amplify_datastore:
   flutter_spinkit:
   http:
   font_awesome_flutter:

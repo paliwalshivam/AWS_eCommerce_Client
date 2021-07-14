@@ -12,21 +12,42 @@ const amplifyconfig = ''' {
                 "CredentialsProvider": {
                     "CognitoIdentity": {
                         "Default": {
-                            "PoolId": "us-east-1:de38059c-8a34-45c0-b046-a5ba416256ec",
+                            "PoolId": "us-east-1:07874173-a8ba-4d80-966c-dcf86ae193ee",
                             "Region": "us-east-1"
                         }
                     }
                 },
                 "CognitoUserPool": {
                     "Default": {
-                        "PoolId": "us-east-1_V4bm6dl2F",
-                        "AppClientId": "552h5qaps2k8ih06ecqtq2g2f9",
+                        "PoolId": "us-east-1_Fs10irzA7",
+                        "AppClientId": "50ra29bmd364aonuggakvhqoo9",
                         "Region": "us-east-1"
                     }
                 },
                 "Auth": {
                     "Default": {
                         "authenticationFlowType": "USER_SRP_AUTH"
+                    }
+                },
+                "AppSync": {
+                    "Default": {
+                        "ApiUrl": "https://ssstezikynfornigyqvyzmutci.appsync-api.us-east-1.amazonaws.com/graphql",
+                        "Region": "us-east-1",
+                        "AuthMode": "API_KEY",
+                        "ApiKey": "da2-hcc52j3ngrcsnpew22aif2dh2q",
+                        "ClientDatabasePrefix": "eCommerceCustomerApp_API_KEY"
+                    },
+                    "eCommerceCustomerApp_AWS_IAM": {
+                        "ApiUrl": "https://ssstezikynfornigyqvyzmutci.appsync-api.us-east-1.amazonaws.com/graphql",
+                        "Region": "us-east-1",
+                        "AuthMode": "AWS_IAM",
+                        "ClientDatabasePrefix": "eCommerceCustomerApp_AWS_IAM"
+                    },
+                    "eCommerceCustomerApp_AMAZON_COGNITO_USER_POOLS": {
+                        "ApiUrl": "https://ssstezikynfornigyqvyzmutci.appsync-api.us-east-1.amazonaws.com/graphql",
+                        "Region": "us-east-1",
+                        "AuthMode": "AMAZON_COGNITO_USER_POOLS",
+                        "ClientDatabasePrefix": "eCommerceCustomerApp_AMAZON_COGNITO_USER_POOLS"
                     }
                 }
             }
@@ -35,25 +56,13 @@ const amplifyconfig = ''' {
     "api": {
         "plugins": {
             "awsAPIPlugin": {
-                "ecommercecustomer": {
+                "eCommerceCustomerApp": {
                     "endpointType": "GraphQL",
-                    "endpoint": "https://6gp7okoovndkvk5hegc4u5v6tq.appsync-api.us-east-1.amazonaws.com/graphql",
+                    "endpoint": "https://ssstezikynfornigyqvyzmutci.appsync-api.us-east-1.amazonaws.com/graphql",
                     "region": "us-east-1",
                     "authorizationType": "API_KEY",
-                    "apiKey": "da2-iqtg7f2safewlkhmjxbufeullq"
+                    "apiKey": "da2-hcc52j3ngrcsnpew22aif2dh2q"
                 }
-            }
-        }
-    },
-    "storage": {
-        "plugins": {
-            "awsDynamoDbStoragePlugin": {
-                "name": "ProductModel-aid5kt6ahngb3bvewg4jdt2uua-dev",
-                "region": "us-east-1",
-                "arn": "arn:aws:dynamodb:us-east-1:989775503323:table/ProductModel-aid5kt6ahngb3bvewg4jdt2uua-dev",
-                "streamArn": "arn:aws:dynamodb:us-east-1:989775503323:table/ProductModel-aid5kt6ahngb3bvewg4jdt2uua-dev/stream/2021-07-07T10:19:30.169",
-                "partitionKeyName": "id",
-                "partitionKeyType": "S"
             }
         }
     }

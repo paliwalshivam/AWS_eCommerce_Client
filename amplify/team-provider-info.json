@@ -1,19 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-ecommercecustomer-dev-104717-authRole",
-      "UnauthRoleArn": "arn:aws:iam::989775503323:role/amplify-ecommercecustomer-dev-104717-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::989775503323:role/amplify-ecommercecustomer-dev-104717-authRole",
+      "AuthRoleName": "amplify-ecommercecustomerapp-dev-190039-authRole",
+      "UnauthRoleArn": "arn:aws:iam::989775503323:role/amplify-ecommercecustomerapp-dev-190039-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::989775503323:role/amplify-ecommercecustomerapp-dev-190039-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-ecommercecustomer-dev-104717-deployment",
-      "UnauthRoleName": "amplify-ecommercecustomer-dev-104717-unauthRole",
-      "StackName": "amplify-ecommercecustomer-dev-104717",
-      "StackId": "arn:aws:cloudformation:us-east-1:989775503323:stack/amplify-ecommercecustomer-dev-104717/1b90aba0-e13e-11eb-863c-0a1e17b4f729",
-      "AmplifyAppId": "d2ay7825wjpk3u"
+      "DeploymentBucketName": "amplify-ecommercecustomerapp-dev-190039-deployment",
+      "UnauthRoleName": "amplify-ecommercecustomerapp-dev-190039-unauthRole",
+      "StackName": "amplify-ecommercecustomerapp-dev-190039",
+      "StackId": "arn:aws:cloudformation:us-east-1:989775503323:stack/amplify-ecommercecustomerapp-dev-190039/b13c1bf0-e4a7-11eb-838d-12717722e021",
+      "AmplifyAppId": "d1xmg12ayaath5"
     },
     "categories": {
       "auth": {
-        "ecommercecustomerd7ec403d": {}
+        "ecommercecustomerapp7b4b51e5": {}
       }
     }
   }
