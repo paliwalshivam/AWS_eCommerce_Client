@@ -1,6 +1,6 @@
 import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
-import 'package:shop_app/utils/fetchData.dart';
+import 'package:shop_app/utils/fetchAllData.dart';
 
 import '../../../size_config.dart';
 import 'categories.dart';

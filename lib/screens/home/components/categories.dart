@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:provider/provider.dart';
+import 'package:shop_app/screens/category/category_screen.dart';
 import '../../../size_config.dart';
+import 'package:shop_app/utils/selectedCategoryToShow.dart';
 
 class Categories extends StatelessWidget {
   @override
@@ -13,6 +15,10 @@ class Categories extends StatelessWidget {
       {"icon": "assets/icons/Gift Icon.svg", "text": "Trees"},
       {"icon": "assets/icons/Discover.svg", "text": "Pots"},
     ];
+
+    List<String> categoriesName = [
+      "Herbs","Shrubs","Climbers","Trees","Pots"
+    ];
     return Padding(
       padding: EdgeInsets.all(getProportionateScreenWidth(20)),
       child: Row(
@@ -23,7 +29,12 @@ class Categories extends StatelessWidget {
           (index) => CategoryCard(
             icon: categories[index]["icon"],
             text: categories[index]["text"],
-            press: () {},
+            press: () {
+              final selectedCategoryToShow = Provider.of<SelectedCategoryToShow>(context,listen: false);
+              selectedCategoryToShow.selectedCategory = categoriesName[index];
+              print(categoriesName[index]);
+              Navigator.pushNamed(context, CategoryScreen.routeName);
+            },
           ),
         ),
       ),

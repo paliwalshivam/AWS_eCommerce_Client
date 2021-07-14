@@ -13,6 +13,7 @@ import 'package:shop_app/utils/selectedProductData.dart';
 import 'package:shop_app/wrapper/Wrapper.dart';
 import 'package:shop_app/models/ModelProvider.dart';
 import 'package:shop_app/repository/cartRepository.dart';
+import 'package:shop_app/utils/selectedCategoryToShow.dart';
 void main() {
   runApp(MyApp());
 }
@@ -54,6 +55,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => EmailProvider()),
         ChangeNotifierProvider(create: (context) => SelectedProductData()),
+        ChangeNotifierProvider(create: (context) => SelectedCategoryToShow()),
         Provider(create: (context)=> ProductRepository()),
       ],
       child: MaterialApp(

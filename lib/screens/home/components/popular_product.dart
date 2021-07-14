@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shop_app/models/productModel.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
 import 'package:shop_app/shared/PopularProductCard.dart';
-import 'package:shop_app/utils/fetchData.dart';
+import 'package:shop_app/utils/fetchAllData.dart';
 import 'package:shop_app/utils/selectedProductData.dart';
 
 import '../../../size_config.dart';
