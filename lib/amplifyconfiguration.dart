@@ -28,11 +28,6 @@ const amplifyconfig = ''' {
                     "Default": {
                         "authenticationFlowType": "USER_SRP_AUTH"
                     }
-                },
-                "DynamoDBObjectMapper": {
-                    "Default": {
-                        "Region": "us-east-1"
-                    }
                 }
             }
         }

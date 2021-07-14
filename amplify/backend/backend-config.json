@@ -8,12 +8,5 @@
     }
   },
   "api": {},
-  "storage": {
-    "ProductModelaid5kt6ahngb3bvewg4jdt2uuadev": {
-      "service": "DynamoDB",
-      "serviceType": "imported",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": []
-    }
-  }
+  "storage": {}
 }

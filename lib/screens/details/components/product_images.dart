@@ -15,13 +15,14 @@ class _ProductImagesState extends State<ProductImages> {
   @override
   Widget build(BuildContext context) {
     final selectedProduct = Provider.of<SelectedProductData>(context);
+    String displayUrl = "https://productslist231449-dev.s3.us-east-1.amazonaws.com/public/"+selectedProduct.productID+"img"+(selectedImage+1).toString();
     return Column(
       children: [
         SizedBox(
           width: getProportionateScreenWidth(238),
           child: AspectRatio(
             aspectRatio: 1,
-            child: Image.network("https://productslist231449-dev.s3.us-east-1.amazonaws.com/public/"+selectedProduct.productID+"img1"),
+            child: Image.network(displayUrl),
           ),
         ),
         SizedBox(height: getProportionateScreenWidth(20)),

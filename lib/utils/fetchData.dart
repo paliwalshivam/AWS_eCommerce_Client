@@ -10,17 +10,19 @@ Future<List<ProductModel>> getProductData() async {
   list = jsonDecode(response.body);
 
   for(int i =0 ; i< list.length ; i++){
-    listOfProducts.add(
-      ProductModel(
-        productId: list[i]["id"],
-        companyName: list[i]["company"],
-        productName: list[i]["product"],
-        category: list[i]["category"],
-        description: list[i]["description"],
-        price: list[i]["price"],
-        size: list[i]["size"],
-      )
-    );
+    if(list[i]["_version"] == 1){
+      listOfProducts.add(
+          ProductModel(
+            productId: list[i]["id"],
+            companyName: list[i]["company"],
+            productName: list[i]["product"],
+            category: list[i]["category"],
+            description: list[i]["description"],
+            price: list[i]["price"],
+            size: list[i]["size"],
+          )
+      );
+    }
   }
   return listOfProducts;
 

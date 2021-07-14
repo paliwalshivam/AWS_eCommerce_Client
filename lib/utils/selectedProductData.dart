@@ -9,6 +9,7 @@ class SelectedProductData extends ChangeNotifier{
   String _description;
   String _price;
   String _size;
+  bool _isFav = false;
 
   String get productID => _productId;
   set productId(String productId){
@@ -43,6 +44,12 @@ class SelectedProductData extends ChangeNotifier{
   String get size => _size;
   set size(String size){
     _size = size;
+    notifyListeners();
+  }
+
+  bool get isFav => _isFav;
+  set isFav(bool isFav){
+    _isFav = isFav;
     notifyListeners();
   }
 }
