@@ -17,9 +17,19 @@ class CartScreen extends StatelessWidget {
     return AppBar(
       title: Column(
         children: [
-          Text(
-            "Your Cart",
-            style: TextStyle(color: Colors.black),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Your Cart",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Swipe Left to remove Items from Cart",
+              style: Theme.of(context).textTheme.caption,
+            ),
           ),
         ],
       ),

@@ -37,8 +37,11 @@ class _BodyState extends State<Body> {
                     key: Key("Remove"),
                     direction: DismissDirection.endToStart,
                     onDismissed: (direction) {
-                      setState(() {
-                        // Remove Item from Cart Code
+                      // Delete Item Code
+                      productRepository.deleteItemFromCart(snapshot.data[index].id).then((value) {
+                        setState(() {
+
+                        });
                       });
                     },
                     background: Container(

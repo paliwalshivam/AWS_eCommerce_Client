@@ -34,8 +34,15 @@ class ProductRepository {
     }
   }
 
-  Future deleteItemFromCart() async{}
-  final itemInCart = CartModel(
+  Future deleteItemFromCart(String originalId) async{
+    final itemInCart = CartModel(
+      id: originalId,
+    );
+    try{
+      Amplify.DataStore.delete(itemInCart);
+    }catch(e){
+      print(e.toString());
+    }
+  }
 
-  );
 }
