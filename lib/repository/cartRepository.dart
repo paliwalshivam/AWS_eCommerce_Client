@@ -1,0 +1,41 @@
+import 'package:amplify_flutter/amplify.dart';
+import 'package:shop_app/models/CartModel.dart';
+
+class ProductRepository {
+  Future<List<CartModel>> getCartItems() async {
+    try{
+      final cartItems = await Amplify.DataStore.query(CartModel.classType);
+      return cartItems;
+    }catch(e){
+      throw e;
+    }
+  }
+
+  Future<CartModel> addToCart(
+      {String id,
+      String productName,
+      String category,
+      String company,
+      String price,
+      int quantity}) async {
+    final itemInCart = CartModel(
+        idFromAdmin: id,
+        productName: productName,
+        productCategory: category,
+        company: company,
+        price: price,
+        quantity: quantity);
+    try {
+      await Amplify.DataStore.save(itemInCart);
+      getCartItems();
+      return itemInCart;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future deleteItemFromCart() async{}
+  final itemInCart = CartModel(
+
+  );
+}

@@ -12,6 +12,7 @@ import 'package:shop_app/singeltons/emailAddress.dart';
 import 'package:shop_app/utils/selectedProductData.dart';
 import 'package:shop_app/wrapper/Wrapper.dart';
 import 'package:shop_app/models/ModelProvider.dart';
+import 'package:shop_app/repository/cartRepository.dart';
 void main() {
   runApp(MyApp());
 }
@@ -52,7 +53,8 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => EmailProvider()),
-        ChangeNotifierProvider(create: (context) => SelectedProductData())
+        ChangeNotifierProvider(create: (context) => SelectedProductData()),
+        Provider(create: (context)=> ProductRepository()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/models/Cart.dart';
-
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
-class CartCard extends StatelessWidget {
-  const CartCard({
-    Key key,
-    @required this.cart,
-  }) : super(key: key);
+class CartCard extends StatefulWidget {
+  final String productName;
+  final String productCost;
+  final String idFromParent;
+  final int quantity;
+  CartCard({this.productName,this.productCost,this.idFromParent,this.quantity});
 
-  final Cart cart;
 
+  @override
+  _CartCardState createState() => _CartCardState();
+}
+
+class _CartCardState extends State<CartCard> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -26,7 +29,7 @@ class CartCard extends StatelessWidget {
                 color: Color(0xFFF5F6F9),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Image.asset("assets/images/glap.png"),
+              child: Image.network("https://productslist231449-dev.s3.us-east-1.amazonaws.com/public/"+widget.idFromParent+"img1",fit: BoxFit.cover,),
             ),
           ),
         ),
@@ -35,19 +38,19 @@ class CartCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-             "title",
+             "${widget.productName}",
               style: TextStyle(color: Colors.black, fontSize: 16),
               maxLines: 2,
             ),
             SizedBox(height: 10),
             Text.rich(
               TextSpan(
-                text: "price",
+                text: "₹ ${widget.productCost}",
                 style: TextStyle(
                     fontWeight: FontWeight.w600, color: kPrimaryColor),
                 children: [
                   TextSpan(
-                      text: "x times",
+                      text: " * ${widget.quantity}",
                       style: Theme.of(context).textTheme.bodyText1),
                 ],
               ),

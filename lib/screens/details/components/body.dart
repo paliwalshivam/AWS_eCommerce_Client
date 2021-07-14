@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/components/default_button.dart';
-import 'package:shop_app/screens/cart/cart_screen.dart';
 import 'package:shop_app/size_config.dart';
+import 'package:shop_app/utils/selectedProductData.dart';
 import 'product_description.dart';
 import 'top_rounded_container.dart';
 import 'product_images.dart';
+import 'package:shop_app/repository/cartRepository.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -13,9 +15,11 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  int quantity =0 ;
+  int quantity =1 ;
   @override
   Widget build(BuildContext context) {
+    final productRepository = Provider.of<ProductRepository>(context);
+    final selectedProduct = Provider.of<SelectedProductData>(context);
     return ListView(
       children: [
         ProductImages(),
@@ -64,8 +68,16 @@ class _BodyState extends State<Body> {
                         ),
                         child: DefaultButton(
                           text: "Add To Cart",
-                          press: () {
-                            Navigator.pushNamed(context, CartScreen.routeName);
+                          press: () async{
+                           final cartItem = await productRepository.addToCart(
+                              id: selectedProduct.productID,
+                              productName: selectedProduct.productName,
+                              category: selectedProduct.category,
+                              company: selectedProduct.companyName,
+                              price: selectedProduct.price,
+                              quantity: quantity
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Item/s added to Cart")));
                           },
                         ),
                       ),
