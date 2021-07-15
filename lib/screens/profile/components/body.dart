@@ -1,5 +1,6 @@
 import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_app/screens/sign_in/sign_in_screen.dart';
 import 'package:shop_app/wrapper/Wrapper.dart';
 
 import 'profile_menu.dart';
@@ -12,7 +13,7 @@ class Body extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
-          ProfilePic(),
+          // ProfilePic(),
           SizedBox(height: 20),
           ProfileMenu(
             text: "My Account",
@@ -38,10 +39,13 @@ class Body extends StatelessWidget {
             text: "Log Out",
             icon: "assets/icons/Log out.svg",
             press: () async{
-              Amplify.Auth.signOut().then((value){
-                Navigator.pushReplacement<void,void>(context, MaterialPageRoute(builder: (context) => Wrapper()));
-              });
-            },
+              try{
+                await Amplify.Auth.signOut();
+              }catch (e){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+              }
+              Navigator.pushReplacement<void,void>(context, MaterialPageRoute(builder: (context) => SignInScreen()));
+              },
           ),
         ],
       ),

@@ -17,14 +17,16 @@
 
 import 'package:amplify_datastore_plugin_interface/amplify_datastore_plugin_interface.dart';
 import 'CartModel.dart';
+import 'LikedProducts.dart';
 
 export 'CartModel.dart';
+export 'LikedProducts.dart';
 
 class ModelProvider implements ModelProviderInterface {
   @override
-  String version = "749d02044f87665dc93f44959479b7b2";
+  String version = "d634d38a67e057c3db0b4516a091c5f2";
   @override
-  List<ModelSchema> modelSchemas = [CartModel.schema];
+  List<ModelSchema> modelSchemas = [CartModel.schema, LikedProducts.schema];
   static final ModelProvider _instance = ModelProvider();
 
   static ModelProvider get instance => _instance;
@@ -34,6 +36,11 @@ class ModelProvider implements ModelProviderInterface {
       case "CartModel":
         {
           return CartModel.classType;
+        }
+        break;
+      case "LikedProducts":
+        {
+          return LikedProducts.classType;
         }
         break;
       default:

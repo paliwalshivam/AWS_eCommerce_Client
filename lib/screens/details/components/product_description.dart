@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app/repository/likedProductsRepository.dart';
 import 'package:shop_app/utils/selectedProductData.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
 class ProductDescription extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final selectedProduct = Provider.of<SelectedProductData>(context);
+    final likedProduct = Provider.of<LikedProductsRepository>(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,8 +19,8 @@ class ProductDescription extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+                padding: EdgeInsets.symmetric(
+                    horizontal: getProportionateScreenWidth(20)),
                 child: Text(
                   selectedProduct.productName,
                   style: Theme.of(context).textTheme.headline5,
@@ -28,18 +29,33 @@ class ProductDescription extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: InkWell(
-                  onTap: (){
-                    if(selectedProduct.isFav == false){
+                  onTap: () {
+                    if (selectedProduct.isFav == false) {
                       selectedProduct.isFav = true;
-                    }else if (selectedProduct.isFav == true){
+                      //Add to LikedProducts Table
+                      likedProduct.addToLikedProducts(
+                          selectedProduct.productID,
+                          selectedProduct.companyName,
+                          selectedProduct.productName,
+                          selectedProduct.category,
+                          selectedProduct.description,
+                          selectedProduct.price,
+                          selectedProduct.size);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Added to Liked Products")));
+                    } else if (selectedProduct.isFav == true) {
                       selectedProduct.isFav = false;
+                      //Remove from Liked Product Table
+                      likedProduct.removeFromLikedProducts(selectedProduct.productID);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Removed from Liked Products")));
                     }
                   },
                   child: Container(
                     padding: EdgeInsets.all(getProportionateScreenWidth(15)),
                     width: getProportionateScreenWidth(64),
                     decoration: BoxDecoration(
-                      color: selectedProduct.isFav ? Color(0xFFFFE6E6) : Color(0xFFF5F6F9),
+                      color: selectedProduct.isFav
+                          ? Color(0xFFFFE6E6)
+                          : Color(0xFFF5F6F9),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         bottomLeft: Radius.circular(20),
@@ -47,7 +63,9 @@ class ProductDescription extends StatelessWidget {
                     ),
                     child: SvgPicture.asset(
                       "assets/icons/Heart Icon_2.svg",
-                      color: selectedProduct.isFav ? Color(0xFFFF4848) : Color(0xFFDBDEE4),
+                      color: selectedProduct.isFav
+                          ? Color(0xFFFF4848)
+                          : Color(0xFFDBDEE4),
                       height: getProportionateScreenWidth(16),
                     ),
                   ),
@@ -56,35 +74,35 @@ class ProductDescription extends StatelessWidget {
             ],
           ),
           Padding(
-            padding:
-            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-            child: Text("₹ ${selectedProduct.price}",
-              style: TextStyle(color: Colors.red,fontSize: 20),
+            padding: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(20)),
+            child: Text(
+              "₹ ${selectedProduct.price}",
+              style: TextStyle(color: Colors.red, fontSize: 20),
             ),
           ),
           Padding(
-            padding:
-            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+            padding: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(20)),
             child: Text(
               selectedProduct.category,
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 15
-              ),
+              style: TextStyle(color: Colors.grey, fontSize: 15),
             ),
           ),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           Padding(
-            padding:
-            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+            padding: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(20)),
             child: Text(
               selectedProduct.companyName,
-              style: TextStyle(
-                color: Colors.black
-              ),
+              style: TextStyle(color: Colors.black),
             ),
           ),
-          SizedBox(height: 5,),
+          SizedBox(
+            height: 5,
+          ),
           Padding(
             padding: EdgeInsets.only(
               left: getProportionateScreenWidth(20),

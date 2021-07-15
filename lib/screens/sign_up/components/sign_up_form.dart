@@ -63,7 +63,17 @@ class _SignUpFormState extends State<SignUpForm> {
                 final emailAddress = Provider.of<EmailProvider>(context,listen: false);
                 emailAddress.emailAddress = email;
                 print(emailAddress.emailAddress);
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Loading")));
+                showDialog(context: context, builder: (BuildContext context){
+                  return AlertDialog(
+                    title: Row(
+                      children: [
+                        Text("Creating Your Account"),
+                        SizedBox(width: 20,),
+                        CircularProgressIndicator()
+                      ],
+                    ),
+                  );
+                });
 
                 try{
                   if(password == conform_password) {

@@ -67,13 +67,13 @@ class _PopularProductCardState extends State<PopularProductCard> {
                       Text("₹ ${widget.productCost}",style: TextStyle(
                         color: Colors.redAccent,fontSize: 20
                       ),),
-                      IconButton(
-                          icon: Icon(FontAwesomeIcons.heart,size: 15,),
-                          onPressed: (){
-
-                        // Favorite Item
-
-                      })
+                      // IconButton(
+                      //     icon: Icon(FontAwesomeIcons.heart,size: 15,),
+                      //     onPressed: (){
+                      //
+                      //   // Favorite Item
+                      //
+                      // })
                     ],
                   ),
                   SizedBox(height: 5,),

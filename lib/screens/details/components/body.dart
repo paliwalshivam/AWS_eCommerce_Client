@@ -77,8 +77,7 @@ class _BodyState extends State<Body> {
                               price: selectedProduct.price,
                               quantity: quantity
                             );
-
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Item/s added to Cart")));
+                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Item/s added to Cart")));
                           },
                         ),
                       ),

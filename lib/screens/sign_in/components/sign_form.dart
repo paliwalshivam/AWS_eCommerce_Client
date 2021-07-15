@@ -55,14 +55,25 @@ class _SignFormState extends State<SignForm> {
 
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Signing In , Please Wait")));
+                showDialog(context: context, builder: (BuildContext context){
+                  return AlertDialog(
+                    title: Row(
+                      children: [
+                        Text("Signing In please wait"),
+                        SizedBox(width: 20,),
+                        CircularProgressIndicator()
+                      ],
+                    ),
+                  );
+                });
                 try{
                   var signInResult = await Amplify.Auth.signIn(username: email, password: password);
                   if(signInResult.isSignedIn){
                     KeyboardUtil.hideKeyboard(context);
-                    Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                    Navigator.pushReplacementNamed(context, LoginSuccessScreen.routeName);
                   }
                 }on AuthException catch (e){
+                  Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.underlyingException)));
                 }
 

@@ -177,6 +177,7 @@ class _OtpFormState extends State<OtpForm> {
                 }
               }catch (e){
                 print(e.toString());
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
               }
 
             },
