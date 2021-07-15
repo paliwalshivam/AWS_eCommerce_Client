@@ -69,7 +69,7 @@ class _BodyState extends State<Body> {
                         child: DefaultButton(
                           text: "Add To Cart",
                           press: () async{
-                           final cartItem = await productRepository.addToCart(
+                           final cartItemId = await productRepository.addToCart(
                               id: selectedProduct.productID,
                               productName: selectedProduct.productName,
                               category: selectedProduct.category,
@@ -77,6 +77,7 @@ class _BodyState extends State<Body> {
                               price: selectedProduct.price,
                               quantity: quantity
                             );
+
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Item/s added to Cart")));
                           },
                         ),

@@ -58,6 +58,13 @@ class ProductDescription extends StatelessWidget {
           Padding(
             padding:
             EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+            child: Text("₹ ${selectedProduct.price}",
+              style: TextStyle(color: Colors.red,fontSize: 20),
+            ),
+          ),
+          Padding(
+            padding:
+            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
             child: Text(
               selectedProduct.category,
               style: TextStyle(

@@ -11,7 +11,7 @@ class ProductRepository {
     }
   }
 
-  Future<CartModel> addToCart(
+  Future<String> addToCart(
       {String id,
       String productName,
       String category,
@@ -28,7 +28,7 @@ class ProductRepository {
     try {
       await Amplify.DataStore.save(itemInCart);
       getCartItems();
-      return itemInCart;
+      return itemInCart.id;
     } catch (e) {
       throw e;
     }
