@@ -9,11 +9,11 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> categories = [
-      {"icon": "assets/icons/pot.svg", "text": "Herbs"},
-      {"icon": "assets/icons/Bill Icon.svg", "text": "Shrubs"},
-      {"icon": "assets/icons/Game Icon.svg", "text": "Climbers"},
-      {"icon": "assets/icons/Gift Icon.svg", "text": "Trees"},
-      {"icon": "assets/icons/Discover.svg", "text": "Pots"},
+      {"icon": "assets/icons/herbCategory.png", "text": "Herbs"},
+      {"icon": "assets/icons/shrubCategory.png", "text": "Shrubs"},
+      {"icon": "assets/icons/climberCategory.png", "text": "Climbers"},
+      {"icon": "assets/icons/treeCategory.png", "text": "Trees"},
+      {"icon": "assets/icons/potCategory.png", "text": "Pots"},
     ];
 
     List<String> categoriesName = [
@@ -62,14 +62,14 @@ class CategoryCard extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(getProportionateScreenWidth(15)),
+              padding: EdgeInsets.all(getProportionateScreenWidth(10)),
               height: getProportionateScreenWidth(55),
               width: getProportionateScreenWidth(55),
               decoration: BoxDecoration(
                 color: Color(0xFFFFECDF),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: SvgPicture.asset(icon),
+              child: Image.asset(icon,fit: BoxFit.cover,scale: 0.1,),
             ),
             SizedBox(height: 5),
             Text(text, textAlign: TextAlign.center)
