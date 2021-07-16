@@ -13,7 +13,7 @@ class LikedProductsRepository {
     }
   }
 
-  Future<void> addToLikedProducts(
+  Future<String> addToLikedProducts(
       String idFromAdmin,
       String company,
       String productName,
@@ -32,6 +32,7 @@ class LikedProductsRepository {
     try {
      Amplify.DataStore.save(likedProduct);
      getLikedProducts();
+     return likedProduct.id;
     } catch (e) {
       throw e;
     }

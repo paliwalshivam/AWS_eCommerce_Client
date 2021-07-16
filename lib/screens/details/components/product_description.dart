@@ -3,10 +3,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/repository/likedProductsRepository.dart';
 import 'package:shop_app/utils/selectedProductData.dart';
-import '../../../constants.dart';
 import '../../../size_config.dart';
 
-class ProductDescription extends StatelessWidget {
+class ProductDescription extends StatefulWidget {
+  @override
+  _ProductDescriptionState createState() => _ProductDescriptionState();
+}
+
+class _ProductDescriptionState extends State<ProductDescription> {
+  String toDeleteId = "";
+  
   @override
   Widget build(BuildContext context) {
     final selectedProduct = Provider.of<SelectedProductData>(context);
@@ -29,23 +35,26 @@ class ProductDescription extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: InkWell(
-                  onTap: () {
+                  onTap: () async {
                     if (selectedProduct.isFav == false) {
                       selectedProduct.isFav = true;
                       //Add to LikedProducts Table
-                      likedProduct.addToLikedProducts(
-                          selectedProduct.productID,
-                          selectedProduct.companyName,
-                          selectedProduct.productName,
-                          selectedProduct.category,
-                          selectedProduct.description,
-                          selectedProduct.price,
-                          selectedProduct.size);
+                          final confirmation =  await likedProduct.addToLikedProducts(
+                            selectedProduct.productID,
+                            selectedProduct.companyName,
+                            selectedProduct.productName,
+                            selectedProduct.category,
+                            selectedProduct.description,
+                            selectedProduct.price,
+                            selectedProduct.size);
+                          setState(() {
+                            toDeleteId = confirmation;
+                          });
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Added to Liked Products")));
                     } else if (selectedProduct.isFav == true) {
                       selectedProduct.isFav = false;
                       //Remove from Liked Product Table
-                      likedProduct.removeFromLikedProducts(selectedProduct.productID);
+                      likedProduct.removeFromLikedProducts(toDeleteId);
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Removed from Liked Products")));
                     }
                   },
@@ -63,9 +72,7 @@ class ProductDescription extends StatelessWidget {
                     ),
                     child: SvgPicture.asset(
                       "assets/icons/Heart Icon_2.svg",
-                      color: selectedProduct.isFav
-                          ? Color(0xFFFF4848)
-                          : Color(0xFFDBDEE4),
+                      color:  selectedProduct.isFav ? Color(0xFFFF4848) : Color(0xFFDBDEE4),
                       height: getProportionateScreenWidth(16),
                     ),
                   ),
@@ -116,4 +123,6 @@ class ProductDescription extends StatelessWidget {
       ),
     );
   }
+
+
 }
