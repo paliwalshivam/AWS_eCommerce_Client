@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/models/LikedProducts.dart';
 import 'package:shop_app/repository/likedProductsRepository.dart';
+import 'package:shop_app/screens/cart/components/cart_card.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
 import 'package:shop_app/screens/category/components/CategoryDataCard.dart';
 import 'package:shop_app/utils/selectedProductData.dart';
@@ -77,10 +78,10 @@ class _BodyState extends State<Body> {
                         selectedProduct.productId = snapshot.data[index].idFromAdmin;
                         Navigator.pushNamed(context, DetailsScreen.routeName);
                       },
-                      child: CategoryDataCard(
+                      child: CartCard(
                         productName: snapshot.data[index].productName,
                         productCost: snapshot.data[index].price,
-                        id: snapshot.data[index].idFromAdmin,
+                        idFromParent: snapshot.data[index].idFromAdmin,
                       ),
                     ),
                   ),

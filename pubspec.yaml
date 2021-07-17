@@ -38,6 +38,7 @@ dependencies:
   flutter_spinkit:
   http:
   font_awesome_flutter:
+  photo_view:
 
 dev_dependencies:
   flutter_test:

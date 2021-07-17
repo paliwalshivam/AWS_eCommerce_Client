@@ -5,21 +5,25 @@ import '../../../constants.dart';
 import '../../../size_config.dart';
 
 class ProductImages extends StatefulWidget {
-
   @override
   _ProductImagesState createState() => _ProductImagesState();
 }
 
 class _ProductImagesState extends State<ProductImages> {
   int selectedImage = 0;
+
   @override
   Widget build(BuildContext context) {
     final selectedProduct = Provider.of<SelectedProductData>(context);
-    String displayUrl = "https://productslist231449-dev.s3.us-east-1.amazonaws.com/public/"+selectedProduct.productID+"img"+(selectedImage+1).toString();
+    String displayUrl =
+        "https://productslist231449-dev.s3.us-east-1.amazonaws.com/public/" +
+            selectedProduct.productID +
+            "img" +
+            (selectedImage + 1).toString();
     return Column(
       children: [
         SizedBox(
-          width: getProportionateScreenWidth(238),
+          width: getProportionateScreenWidth(260),
           child: AspectRatio(
             aspectRatio: 1,
             child: Image.network(displayUrl),
@@ -29,8 +33,7 @@ class _ProductImagesState extends State<ProductImages> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ...List.generate(3,
-                (index) => buildSmallProductPreview(index)),
+            ...List.generate(3, (index) => buildSmallProductPreview(index)),
           ],
         )
       ],
@@ -57,7 +60,11 @@ class _ProductImagesState extends State<ProductImages> {
           border: Border.all(
               color: kPrimaryColor.withOpacity(selectedImage == index ? 1 : 0)),
         ),
-        child: Image.network("https://productslist231449-dev.s3.us-east-1.amazonaws.com/public/"+selectedProduct.productID+"img"+(index+1).toString()),
+        child: Image.network(
+            "https://productslist231449-dev.s3.us-east-1.amazonaws.com/public/" +
+                selectedProduct.productID +
+                "img" +
+                (index + 1).toString()),
       ),
     );
   }

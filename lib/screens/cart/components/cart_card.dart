@@ -6,7 +6,7 @@ class CartCard extends StatefulWidget {
   final String productName;
   final String productCost;
   final String idFromParent;
-  final int quantity;
+  int quantity;
   CartCard({this.productName,this.productCost,this.idFromParent,this.quantity});
 
 
@@ -50,7 +50,7 @@ class _CartCardState extends State<CartCard> {
                     fontWeight: FontWeight.w600, color: kPrimaryColor),
                 children: [
                   TextSpan(
-                      text: " * ${widget.quantity}",
+                      text: widget.quantity == null ? "":" * ${widget.quantity}",
                       style: Theme.of(context).textTheme.bodyText1),
                 ],
               ),
