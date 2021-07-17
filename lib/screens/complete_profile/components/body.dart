@@ -4,7 +4,14 @@ import 'package:shop_app/size_config.dart';
 
 import 'complete_profile_form.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
+  final List orderList;
+  Body(this.orderList);
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -19,11 +26,11 @@ class Body extends StatelessWidget {
                 SizedBox(height: SizeConfig.screenHeight * 0.03),
                 Text("Complete Profile", style: headingStyle),
                 Text(
-                  "Complete your details or continue  \nwith social media",
+                  "Fill in the details to place  \n  your order",
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.06),
-                CompleteProfileForm(),
+                CompleteProfileForm(widget.orderList),
                 SizedBox(height: getProportionateScreenHeight(30)),
                 Text(
                   "By continuing your confirm that you agree \nwith our Term and Condition",

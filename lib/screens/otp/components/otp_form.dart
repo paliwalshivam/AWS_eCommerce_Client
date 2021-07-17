@@ -2,6 +2,7 @@ import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/components/default_button.dart';
+import 'package:shop_app/screens/home/home_screen.dart';
 import 'package:shop_app/size_config.dart';
 import 'package:shop_app/singeltons/emailAddress.dart';
 import '../../../constants.dart';
@@ -173,7 +174,7 @@ class _OtpFormState extends State<OtpForm> {
               try{
                 var otpResult = await Amplify.Auth.confirmSignUp(username: emailAddress.emailAddress, confirmationCode: otp);
                 if(otpResult.isSignUpComplete){
-                  Navigator.pushNamed(context, CompleteProfileScreen.routeName);
+                  Navigator.pushNamed(context, HomeScreen.routeName);
                 }
               }catch (e){
                 print(e.toString());

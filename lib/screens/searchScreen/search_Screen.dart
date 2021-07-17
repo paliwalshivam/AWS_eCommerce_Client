@@ -64,7 +64,6 @@ class _SearchScreenState extends State<SearchScreen> {
                                 ),
                               );}, childCount: snapshot.data.length,),
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 10,crossAxisSpacing: 10,childAspectRatio: itemWidth/itemHeight)),
-
                     ],
                   );
                 } else {

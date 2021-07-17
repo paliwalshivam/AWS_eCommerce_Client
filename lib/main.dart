@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/amplifyconfiguration.dart';
 import 'package:shop_app/repository/likedProductsRepository.dart';
+import 'package:shop_app/repository/orderedProductsRepository.dart';
 import 'package:shop_app/routes.dart';
 import 'package:shop_app/singeltons/isAmplifyConfigured.dart';
 import 'package:shop_app/theme.dart';
@@ -58,7 +59,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => SelectedProductData()),
         ChangeNotifierProvider(create: (context) => SelectedCategoryToShow()),
         Provider(create: (context)=> ProductRepository()),
-        Provider(create: (context) => LikedProductsRepository())
+        Provider(create: (context) => LikedProductsRepository()),
+        Provider(create: (context) => OrderedProductsRepository())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

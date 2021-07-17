@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/models/CartModel.dart';
 import 'package:shop_app/repository/cartRepository.dart';
+import 'package:shop_app/screens/complete_profile/complete_profile_screen.dart';
 import '../../../size_config.dart';
 
 class CheckoutCard extends StatefulWidget {
@@ -28,6 +29,7 @@ class _CheckoutCardState extends State<CheckoutCard> {
 
   @override
   Widget build(BuildContext context) {
+    final productRepository = Provider.of<ProductRepository>(context);
     return FutureBuilder(
       future: calculateTotal(),
       builder: (context, snapshot) {
@@ -87,8 +89,10 @@ class _CheckoutCardState extends State<CheckoutCard> {
                                       Row(
                                         children: [
                                           TextButton(
-                                              onPressed: () {
+                                              onPressed: () async{
                                                 //Save Order and Sync to Admin Code
+                                                final listToPass = await productRepository.getCartItems();
+                                                Navigator.push(context, MaterialPageRoute(builder: (context)=> CompleteProfileScreen(listToPass)));
                                               },
                                               child: Text("Yes")),
                                           TextButton(

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/components/custom_surfix_icon.dart';
 import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/components/form_error.dart';
+import 'package:shop_app/repository/orderedProductsRepository.dart';
 import 'package:shop_app/screens/home/home_screen.dart';
 import 'package:shop_app/screens/otp/otp_screen.dart';
 
@@ -9,6 +12,8 @@ import '../../../constants.dart';
 import '../../../size_config.dart';
 
 class CompleteProfileForm extends StatefulWidget {
+  final List orderList;
+  CompleteProfileForm(this.orderList);
   @override
   _CompleteProfileFormState createState() => _CompleteProfileFormState();
 }
@@ -37,6 +42,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
 
   @override
   Widget build(BuildContext context) {
+    final orderProducts = Provider.of<OrderedProductsRepository>(context);
     return Form(
       key: _formKey,
       child: Column(
@@ -51,9 +57,15 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
           FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(40)),
           DefaultButton(
-            text: "continue",
-            press: () {
+            text: "Place Order",
+            press: () async{
               if (_formKey.currentState.validate()) {
+                print(firstName+lastName);
+                _formKey.currentState.save();
+                for(int i =0 ; i<= widget.orderList.length-1;i++){
+                  await orderProducts.orderProduct(widget.orderList[i].productName,widget.orderList[i].quantity, firstName +" $lastName",phoneNumber, address, widget.orderList[i].price,widget.orderList[i].idFromAdmin);
+                }
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Ordered Successfully"),duration: Duration(seconds: 1),));
                 Navigator.pushNamed(context, HomeScreen.routeName);
               }
             },
@@ -69,6 +81,9 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kAddressNullError);
+          setState(() {
+            address = value;
+          });
         }
         return null;
       },
@@ -98,6 +113,9 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPhoneNumberNullError);
+          setState(() {
+            phoneNumber = value;
+          });
         }
         return null;
       },
@@ -121,7 +139,11 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
 
   TextFormField buildLastNameFormField() {
     return TextFormField(
-      onSaved: (newValue) => lastName = newValue,
+      onChanged: (value){
+        setState(() {
+          lastName = value;
+        });
+      },
       decoration: InputDecoration(
         labelText: "Last Name",
         hintText: "Enter your last name",
@@ -138,6 +160,9 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       onSaved: (newValue) => firstName = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
+          setState(() {
+            firstName = value;
+          });
           removeError(error: kNamelNullError);
         }
         return null;
