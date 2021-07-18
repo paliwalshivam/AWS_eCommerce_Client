@@ -41,12 +41,11 @@ class _ProductDescriptionState extends State<ProductDescription> {
                       //Add to LikedProducts Table
                           final confirmation =  await likedProduct.addToLikedProducts(
                             selectedProduct.productID,
-                            selectedProduct.companyName,
                             selectedProduct.productName,
                             selectedProduct.category,
                             selectedProduct.description,
                             selectedProduct.price,
-                            selectedProduct.size);
+                            );
                           setState(() {
                             toDeleteId = confirmation;
                           });
@@ -98,14 +97,6 @@ class _ProductDescriptionState extends State<ProductDescription> {
           ),
           SizedBox(
             height: 10,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(20)),
-            child: Text(
-              selectedProduct.companyName,
-              style: TextStyle(color: Colors.black),
-            ),
           ),
           SizedBox(
             height: 5,

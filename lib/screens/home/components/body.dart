@@ -54,11 +54,9 @@ class Body extends StatelessWidget {
                                   return InkWell(
                                     onTap: () {
                                       selectedProduct.productName = productModel.productName;
-                                      selectedProduct.companyName = productModel.companyName;
                                       selectedProduct.category = productModel.category;
                                       selectedProduct.description = productModel.description;
                                       selectedProduct.price = productModel.price;
-                                      selectedProduct.size = productModel.size;
                                       selectedProduct.productId = productModel.productId;
                                       Navigator.pushNamed(context, DetailsScreen.routeName);
                                       },

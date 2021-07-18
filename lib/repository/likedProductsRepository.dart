@@ -15,20 +15,18 @@ class LikedProductsRepository {
 
   Future<String> addToLikedProducts(
       String idFromAdmin,
-      String company,
       String productName,
       String productCategory,
       String description,
       String price,
-      String size) async {
+      ) async {
     final likedProduct = LikedProducts(
         idFromAdmin: idFromAdmin,
-        company: company,
         productName: productName,
         productCategory: productCategory,
         description: description,
         price: price,
-        size: size);
+    );
     try {
      Amplify.DataStore.save(likedProduct);
      getLikedProducts();

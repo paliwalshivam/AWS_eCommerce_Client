@@ -77,11 +77,12 @@ class _PopularProductCardState extends State<PopularProductCard> {
                 SizedBox(height: 5,),
                 Align(
                   child: Text(
-                    "${widget.productDescription}",
+                    widget.productDescription.length >=20 ?
+                    "${widget.productDescription.substring(0,20)}" : "${widget.productDescription}",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,
-                        fontSize: 14,
+                        fontSize: 12,
                     ),
                   ),
                   alignment: Alignment.topLeft,

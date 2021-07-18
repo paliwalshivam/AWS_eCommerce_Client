@@ -73,7 +73,6 @@ class _BodyState extends State<Body> {
                               id: selectedProduct.productID,
                               productName: selectedProduct.productName,
                               category: selectedProduct.category,
-                              company: selectedProduct.companyName,
                               price: selectedProduct.price,
                               quantity: quantity
                             );

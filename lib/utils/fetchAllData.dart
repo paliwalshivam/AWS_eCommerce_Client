@@ -14,12 +14,10 @@ Future<List<ProductModel>> getProductData() async {
       listOfProducts.add(
           ProductModel(
             productId: list[i]["id"],
-            companyName: list[i]["company"],
             productName: list[i]["product"],
             category: list[i]["category"],
             description: list[i]["description"],
             price: list[i]["price"],
-            size: list[i]["size"],
           )
       );
     }
@@ -39,12 +37,10 @@ Future<List<ProductModel>> getSearchedProductData(String searchQuery) async {
       listOfProducts.add(
           ProductModel(
             productId: list[i]["id"],
-            companyName: list[i]["company"],
             productName: list[i]["product"],
             category: list[i]["category"],
             description: list[i]["description"],
             price: list[i]["price"],
-            size: list[i]["size"],
           )
       );
     }

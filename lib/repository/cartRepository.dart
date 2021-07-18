@@ -15,14 +15,12 @@ class ProductRepository {
       {String id,
       String productName,
       String category,
-      String company,
       String price,
       int quantity}) async {
     final itemInCart = CartModel(
         idFromAdmin: id,
         productName: productName,
         productCategory: category,
-        company: company,
         price: price,
         quantity: quantity);
     try {

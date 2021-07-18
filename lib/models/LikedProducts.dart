@@ -24,12 +24,10 @@ class LikedProducts extends Model {
   static const classType = const _LikedProductsModelType();
   final String id;
   final String idFromAdmin;
-  final String company;
   final String productName;
   final String productCategory;
   final String description;
   final String price;
-  final String size;
 
   @override
   getInstanceType() => classType;
@@ -42,31 +40,25 @@ class LikedProducts extends Model {
   const LikedProducts._internal(
       {@required this.id,
       this.idFromAdmin,
-      this.company,
       this.productName,
       this.productCategory,
       this.description,
-      this.price,
-      this.size});
+      this.price});
 
   factory LikedProducts(
       {String id,
       String idFromAdmin,
-      String company,
       String productName,
       String productCategory,
       String description,
-      String price,
-      String size}) {
+      String price}) {
     return LikedProducts._internal(
         id: id == null ? UUID.getUUID() : id,
         idFromAdmin: idFromAdmin,
-        company: company,
         productName: productName,
         productCategory: productCategory,
         description: description,
-        price: price,
-        size: size);
+        price: price);
   }
 
   bool equals(Object other) {
@@ -79,12 +71,10 @@ class LikedProducts extends Model {
     return other is LikedProducts &&
         id == other.id &&
         idFromAdmin == other.idFromAdmin &&
-        company == other.company &&
         productName == other.productName &&
         productCategory == other.productCategory &&
         description == other.description &&
-        price == other.price &&
-        size == other.size;
+        price == other.price;
   }
 
   @override
@@ -97,12 +87,10 @@ class LikedProducts extends Model {
     buffer.write("LikedProducts {");
     buffer.write("id=" + "$id" + ", ");
     buffer.write("idFromAdmin=" + "$idFromAdmin" + ", ");
-    buffer.write("company=" + "$company" + ", ");
     buffer.write("productName=" + "$productName" + ", ");
     buffer.write("productCategory=" + "$productCategory" + ", ");
     buffer.write("description=" + "$description" + ", ");
-    buffer.write("price=" + "$price" + ", ");
-    buffer.write("size=" + "$size");
+    buffer.write("price=" + "$price");
     buffer.write("}");
 
     return buffer.toString();
@@ -111,53 +99,43 @@ class LikedProducts extends Model {
   LikedProducts copyWith(
       {String id,
       String idFromAdmin,
-      String company,
       String productName,
       String productCategory,
       String description,
-      String price,
-      String size}) {
+      String price}) {
     return LikedProducts(
         id: id ?? this.id,
         idFromAdmin: idFromAdmin ?? this.idFromAdmin,
-        company: company ?? this.company,
         productName: productName ?? this.productName,
         productCategory: productCategory ?? this.productCategory,
         description: description ?? this.description,
-        price: price ?? this.price,
-        size: size ?? this.size);
+        price: price ?? this.price);
   }
 
   LikedProducts.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         idFromAdmin = json['idFromAdmin'],
-        company = json['company'],
         productName = json['productName'],
         productCategory = json['productCategory'],
         description = json['description'],
-        price = json['price'],
-        size = json['size'];
+        price = json['price'];
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'idFromAdmin': idFromAdmin,
-        'company': company,
         'productName': productName,
         'productCategory': productCategory,
         'description': description,
-        'price': price,
-        'size': size
+        'price': price
       };
 
   static final QueryField ID = QueryField(fieldName: "likedProducts.id");
   static final QueryField IDFROMADMIN = QueryField(fieldName: "idFromAdmin");
-  static final QueryField COMPANY = QueryField(fieldName: "company");
   static final QueryField PRODUCTNAME = QueryField(fieldName: "productName");
   static final QueryField PRODUCTCATEGORY =
       QueryField(fieldName: "productCategory");
   static final QueryField DESCRIPTION = QueryField(fieldName: "description");
   static final QueryField PRICE = QueryField(fieldName: "price");
-  static final QueryField SIZE = QueryField(fieldName: "size");
   static var schema =
       Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "LikedProducts";
@@ -180,11 +158,6 @@ class LikedProducts extends Model {
         ofType: ModelFieldType(ModelFieldTypeEnum.string)));
 
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
-        key: LikedProducts.COMPANY,
-        isRequired: false,
-        ofType: ModelFieldType(ModelFieldTypeEnum.string)));
-
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
         key: LikedProducts.PRODUCTNAME,
         isRequired: false,
         ofType: ModelFieldType(ModelFieldTypeEnum.string)));
@@ -201,11 +174,6 @@ class LikedProducts extends Model {
 
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
         key: LikedProducts.PRICE,
-        isRequired: false,
-        ofType: ModelFieldType(ModelFieldTypeEnum.string)));
-
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-        key: LikedProducts.SIZE,
         isRequired: false,
         ofType: ModelFieldType(ModelFieldTypeEnum.string)));
   });

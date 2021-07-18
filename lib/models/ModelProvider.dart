@@ -26,7 +26,7 @@ export 'OrderList.dart';
 
 class ModelProvider implements ModelProviderInterface {
   @override
-  String version = "48e7a4dd216e8487af3304f9172b931f";
+  String version = "7b5de28acb3c5ec2ac923641caf60232";
   @override
   List<ModelSchema> modelSchemas = [
     CartModel.schema,

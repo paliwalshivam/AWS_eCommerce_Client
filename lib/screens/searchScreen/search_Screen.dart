@@ -49,11 +49,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                 onTap: () {
                                   final selectedProduct = Provider.of<SelectedProductData>(context,listen: false);
                                   selectedProduct.productName = snapshot.data[index].productName;
-                                  selectedProduct.companyName = snapshot.data[index].companyName;
                                   selectedProduct.category = snapshot.data[index].category;
                                   selectedProduct.description = snapshot.data[index].description;
                                   selectedProduct.price = snapshot.data[index].price;
-                                  selectedProduct.size = snapshot.data[index].size;
                                   selectedProduct.productId = snapshot.data[index].productId;
                                   Navigator.pushNamed(context, DetailsScreen.routeName);
                                 },

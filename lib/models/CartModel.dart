@@ -26,7 +26,6 @@ class CartModel extends Model {
   final String idFromAdmin;
   final String productName;
   final String productCategory;
-  final String company;
   final String price;
   final int quantity;
 
@@ -43,7 +42,6 @@ class CartModel extends Model {
       @required this.idFromAdmin,
       @required this.productName,
       @required this.productCategory,
-      @required this.company,
       @required this.price,
       this.quantity});
 
@@ -52,7 +50,6 @@ class CartModel extends Model {
       @required String idFromAdmin,
       @required String productName,
       @required String productCategory,
-      @required String company,
       @required String price,
       int quantity}) {
     return CartModel._internal(
@@ -60,7 +57,6 @@ class CartModel extends Model {
         idFromAdmin: idFromAdmin,
         productName: productName,
         productCategory: productCategory,
-        company: company,
         price: price,
         quantity: quantity);
   }
@@ -77,7 +73,6 @@ class CartModel extends Model {
         idFromAdmin == other.idFromAdmin &&
         productName == other.productName &&
         productCategory == other.productCategory &&
-        company == other.company &&
         price == other.price &&
         quantity == other.quantity;
   }
@@ -94,7 +89,6 @@ class CartModel extends Model {
     buffer.write("idFromAdmin=" + "$idFromAdmin" + ", ");
     buffer.write("productName=" + "$productName" + ", ");
     buffer.write("productCategory=" + "$productCategory" + ", ");
-    buffer.write("company=" + "$company" + ", ");
     buffer.write("price=" + "$price" + ", ");
     buffer
         .write("quantity=" + (quantity != null ? quantity.toString() : "null"));
@@ -108,7 +102,6 @@ class CartModel extends Model {
       String idFromAdmin,
       String productName,
       String productCategory,
-      String company,
       String price,
       int quantity}) {
     return CartModel(
@@ -116,7 +109,6 @@ class CartModel extends Model {
         idFromAdmin: idFromAdmin ?? this.idFromAdmin,
         productName: productName ?? this.productName,
         productCategory: productCategory ?? this.productCategory,
-        company: company ?? this.company,
         price: price ?? this.price,
         quantity: quantity ?? this.quantity);
   }
@@ -126,7 +118,6 @@ class CartModel extends Model {
         idFromAdmin = json['idFromAdmin'],
         productName = json['productName'],
         productCategory = json['productCategory'],
-        company = json['company'],
         price = json['price'],
         quantity = json['quantity'];
 
@@ -135,7 +126,6 @@ class CartModel extends Model {
         'idFromAdmin': idFromAdmin,
         'productName': productName,
         'productCategory': productCategory,
-        'company': company,
         'price': price,
         'quantity': quantity
       };
@@ -145,7 +135,6 @@ class CartModel extends Model {
   static final QueryField PRODUCTNAME = QueryField(fieldName: "productName");
   static final QueryField PRODUCTCATEGORY =
       QueryField(fieldName: "productCategory");
-  static final QueryField COMPANY = QueryField(fieldName: "company");
   static final QueryField PRICE = QueryField(fieldName: "price");
   static final QueryField QUANTITY = QueryField(fieldName: "quantity");
   static var schema =
@@ -176,11 +165,6 @@ class CartModel extends Model {
 
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
         key: CartModel.PRODUCTCATEGORY,
-        isRequired: true,
-        ofType: ModelFieldType(ModelFieldTypeEnum.string)));
-
-    modelSchemaDefinition.addField(ModelFieldDefinition.field(
-        key: CartModel.COMPANY,
         isRequired: true,
         ofType: ModelFieldType(ModelFieldTypeEnum.string)));
 
