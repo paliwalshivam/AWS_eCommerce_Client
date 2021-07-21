@@ -23,7 +23,7 @@ class _OtpFormState extends State<OtpForm> {
   FocusNode pin4FocusNode;
   FocusNode pin5FocusNode;
   FocusNode pin6FocusNode;
-  String otp;
+  String otp,first,second,third,fourth,fifth,sixth;
   @override
   void initState() {
     super.initState();
@@ -71,7 +71,7 @@ class _OtpFormState extends State<OtpForm> {
                   onChanged: (value) {
                     nextField(value, pin2FocusNode);
                     setState(() {
-                      otp = value;
+                      first = value;
                     });
                   },
                 ),
@@ -87,7 +87,7 @@ class _OtpFormState extends State<OtpForm> {
                   decoration: otpInputDecoration,
                   onChanged: (value) {
                     setState(() {
-                      otp = otp + value;
+                      second = value;
                     });
                     nextField(value, pin3FocusNode);
                   },
@@ -104,7 +104,7 @@ class _OtpFormState extends State<OtpForm> {
                   decoration: otpInputDecoration,
                   onChanged: (value) {
                     setState(() {
-                      otp = otp + value;
+                      third = value;
                     });
                     nextField(value, pin4FocusNode);
                   } ,
@@ -121,7 +121,7 @@ class _OtpFormState extends State<OtpForm> {
                   decoration: otpInputDecoration,
                   onChanged: (value) {
                     setState(() {
-                      otp = otp +value;
+                      fourth = value;
                     });
                     nextField(value, pin5FocusNode);
                   } ,
@@ -138,7 +138,7 @@ class _OtpFormState extends State<OtpForm> {
                   decoration: otpInputDecoration,
                   onChanged: (value) {
                     setState(() {
-                      otp = otp + value;
+                     fifth = value;
                     });
                     nextField(value, pin6FocusNode);
                   } ,
@@ -158,7 +158,8 @@ class _OtpFormState extends State<OtpForm> {
                       pin6FocusNode.unfocus();
                     }
                     setState(() {
-                      otp = otp + value;
+                      sixth = value;
+                      otp = first + second+third+fourth+fifth+sixth;
                     });
                   }
                 ),
@@ -169,11 +170,23 @@ class _OtpFormState extends State<OtpForm> {
           DefaultButton(
             text: "Continue",
             press: () async{
-              final emailAddress = Provider.of<EmailProvider>(context,listen: false);
+              showDialog(context: context, builder: (BuildContext context){
+                return AlertDialog(
+                  title: Row(
+                    children: [
+                      Text("Creating your Account"),
+                      SizedBox(width: 20,),
+                      CircularProgressIndicator()
+                    ],
+                  ),
+                );
+              });
+              final userDetails = Provider.of<EmailProvider>(context,listen: false);
               print(otp);
               try{
-                var otpResult = await Amplify.Auth.confirmSignUp(username: emailAddress.emailAddress, confirmationCode: otp);
+                var otpResult = await Amplify.Auth.confirmSignUp(username: userDetails.emailAddress, confirmationCode: otp);
                 if(otpResult.isSignUpComplete){
+                  await Amplify.Auth.signIn(username: userDetails.emailAddress, password: userDetails.password);
                   Navigator.pushNamed(context, HomeScreen.routeName);
                 }
               }catch (e){

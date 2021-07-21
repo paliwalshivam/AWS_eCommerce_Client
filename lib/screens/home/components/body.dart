@@ -1,3 +1,5 @@
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +45,17 @@ class Body extends StatelessWidget {
                             padding: EdgeInsets.symmetric(
                                 horizontal: getProportionateScreenWidth(20)),
                             child:
-                            SectionTitle(title: "Popular Products", press: () {}),
+                            SectionTitle(title: "Popular Products", press: () async {
+                              try{
+                                print("Working");
+                                var res = await Amplify.Auth.fetchUserAttributes();
+                                res.forEach((element) {
+                                  print('key: ${element.userAttributeKey}; value: ${element.value}');
+                                });
+                              }on AuthException catch (e){
+                                print(e.message);
+                              }
+                            }),
                           ),
                           SizedBox(height: getProportionateScreenWidth(30)),
                         ])),

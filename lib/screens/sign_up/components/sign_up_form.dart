@@ -12,7 +12,6 @@ import '../../../constants.dart';
 import '../../../size_config.dart';
 import '../../otp/otp_screen.dart';
 
-
 class SignUpForm extends StatefulWidget {
   @override
   _SignUpFormState createState() => _SignUpFormState();
@@ -60,33 +59,38 @@ class _SignUpFormState extends State<SignUpForm> {
                 _formKey.currentState.save();
 
                 // SignUp Logic
-                final emailAddress = Provider.of<EmailProvider>(context,listen: false);
-                emailAddress.emailAddress = email;
-                print(emailAddress.emailAddress);
-                showDialog(context: context, builder: (BuildContext context){
-                  return AlertDialog(
-                    title: Row(
-                      children: [
-                        Text("Creating Your Account"),
-                        SizedBox(width: 20,),
-                        CircularProgressIndicator()
-                      ],
-                    ),
-                  );
-                });
-
-                try{
-                  if(password == conform_password) {
+                final userDetails =
+                    Provider.of<EmailProvider>(context, listen: false);
+                userDetails.emailAddress = email;
+                userDetails.password = password;
+                print(userDetails.emailAddress);
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Row(
+                          children: [
+                            Text("Please Wait"),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            CircularProgressIndicator()
+                          ],
+                        ),
+                      );
+                    });
+                try {
+                  if (password == conform_password) {
                     var signUpResult = await Amplify.Auth.signUp(
                         username: email,
                         password: password,
-                        options: CognitoSignUpOptions(userAttributes: {'email' : email}));
-
-                    if(signUpResult.isSignUpComplete){
+                        options: CognitoSignUpOptions(
+                            userAttributes: {'email': email}));
+                    if (signUpResult.isSignUpComplete) {
                       Navigator.pushNamed(context, OtpScreen.routeName);
                     }
                   }
-                }catch (e){
+                } catch (e) {
                   print(e.toString());
                 }
               }
@@ -195,6 +199,4 @@ class _SignUpFormState extends State<SignUpForm> {
       ),
     );
   }
-
-
 }

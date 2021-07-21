@@ -1,0 +1,29 @@
+type OrderList @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  productName: String
+  quantity: Int
+  customerName: String
+  mobileNumber: String
+  address: String
+  orderTotal: String
+  idFromAdmin: String
+}
+
+type LikedProducts @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  idFromAdmin: String
+  productName: String
+  productCategory: String
+  description: String
+  price: String
+}
+
+type CartModel @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  idFromAdmin: String!
+  productName: String!
+  productCategory: String!
+  price: String!
+  quantity: Int
+}
+ 
